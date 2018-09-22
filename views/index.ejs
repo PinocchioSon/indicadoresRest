@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+     <a href="indicador/all">Lista completa</a> 
+     <div class="container">
+
+		<h1>Formulário de cadastro</h1>
+
+		<form id="create-form" title="" method="post">
+		  <div class="grupoform">
+			<label for= "dataIntegracao">dataIntegração: </label>
+			<input type="text" id="dataIntegracao" name="dataIntegracao" placeholder="Digite aqui a data de integração" required>
+		  </div>
+
+		  <div class="grupoform">
+			<label for="dataUltAlteracao">Data Ultima Alteracao: </label>
+			<input type="text" id="dataUltAlteracao" placeholder="Digite a Data Ultima Alteracao" required>
+		  </div>
+
+		  <div class="grupoform">
+			<label for="formulaCalculo">Formula calculo: </label>
+			<input type="text" id="formulaCalculo" placeholder="Digite a formula de calculo" required>
+		  </div>
+
+		  <div class="grupoform">
+			<label for="idDrgIntegracao">idDrgIntegracao: </label>
+			<input type="text" id="idDrgIntegracao" required>
+		  </div>
+
+		  <div class="grupoform">
+			<label for="identDirecaoSeta">identDirecaoSeta: </label>
+			<input type="text" id="identDirecaoSeta" required>
+		  </div>
+
+		  <div class="grupoform">
+			<label for="identPeriodicidade">identPeriodicidade: </label>
+			<input type="text" id="identPeriodicidade" required>
+		  </div>
+
+		  <div class="grupoform">
+			<label for="identReferencial">identReferencial: </label>
+			<input type="text" id="identReferencial" required>
+		  </div>
+		  <div>
+            <input type="submit" id="submitButton"  name="submitButton" value="Submit">
+        </div>
+
+		
+	</div>
+	<table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+	<script src="jquery.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
+
+<scrip src="bower_components/jquery/jquery.js"></scrip>
+
+<script>
+$("#enviar").click(function(){
+
+  var nome = $("#nome").val();
+  var cpf = $("#cpf").val();
+  var email = $("#email").val();
+  var rua = $("#endereco").val();
+  var complemento = $("#complemento").val();
+  var bairro = $("#bairro").val();
+  var cep = $("#cep").val();
+  var cidade = $("#cidade").val();
+  var estado = $("#estado").val();
+  var telefone = $("#telefone").val();
+  var numero = $("#numero").val();
+  var localidade =  {rua,complemento,bairro,cep,cidade,estado,numero};
+  var investidor = {nome,cpf,email,localidade,telefone};
+
+
+  $.ajax({
+    url: "indicador/save",
+    type: "POST",
+    data: {"investidor":{"nome":nome, "cpf":cpf, "email":email, "localidade":{"rua":rua,"complemento":complemento,"bairro":bairro,"cep":cep,"cidade":cidade,"estado":estado,"numero":numero},"telefone":telefone}},
+    contentType: "application/json",
+    success: function(data){
+      console.log(data.serialize());
+  },
+  error: function(error){
+       console.log("Something went wrong", error);
+   }
+  });
+});
+</script>
