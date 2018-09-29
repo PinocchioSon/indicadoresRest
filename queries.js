@@ -44,6 +44,7 @@ function getSingleIndicador(req, res, next) {
 
 function createIndicador(req, res, next) {
   //req.body.age = parseInt(req.body.age);
+  console.log("Pino %s %s \n", req.body.dataIntegracao, req.body.dataUltAlteracao);
   db.none('insert into indics(dataIntegracao, dataUltAlteracao, formulaCalculo, idDrgIntegracao, identDirecaoSeta, identPeriodicidade, identReferencial, informacoesAdicionais, nome, numDecimais, objetivo, unidade, usuarioUltAlteracao, versao)' +
       'values(${dataIntegracao}, ${dataUltAlteracao}, ${formulaCalculo}, ${idDrgIntegracao}, ${identDirecaoSeta}, ${identPeriodicidade}, ${identReferencial}, ${informacoesAdicionais}, ${nome}, ${numDecimais}, ${objetivo}, ${unidade}, ${usuarioUltAlteracao}, ${versao})',
     req.body)

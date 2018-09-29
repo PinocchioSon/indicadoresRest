@@ -5,14 +5,12 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
      <a href="indicador/all">Lista completa</a> 
      <div class="container">
 
 		<h1>Formulário de cadastro</h1>
 
-		<form id="create-form" title="" method="post">
+		<form action="/indicador/save" form id="create-form" title="" method="post">
 		  <div class="grupoform">
 			<label for= "dataIntegracao">dataIntegração: </label>
 			<input type="text" id="dataIntegracao" name="dataIntegracao" placeholder="Digite aqui a data de integração" required>
@@ -20,85 +18,143 @@
 
 		  <div class="grupoform">
 			<label for="dataUltAlteracao">Data Ultima Alteracao: </label>
-			<input type="text" id="dataUltAlteracao" placeholder="Digite a Data Ultima Alteracao" required>
+			<input type="text" id="dataUltAlteracao" name="dataUltAlteracao" placeholder="Digite a Data Ultima Alteracao" required>
 		  </div>
 
 		  <div class="grupoform">
 			<label for="formulaCalculo">Formula calculo: </label>
-			<input type="text" id="formulaCalculo" placeholder="Digite a formula de calculo" required>
+			<input type="text" id="formulaCalculo" name="formulaCalculo" placeholder="Digite a formula de calculo" required>
 		  </div>
 
 		  <div class="grupoform">
 			<label for="idDrgIntegracao">idDrgIntegracao: </label>
-			<input type="text" id="idDrgIntegracao" required>
+			<input type="text" id="idDrgIntegracao" name="idDrgIntegracao" required>
 		  </div>
 
 		  <div class="grupoform">
 			<label for="identDirecaoSeta">identDirecaoSeta: </label>
-			<input type="text" id="identDirecaoSeta" required>
+			<input type="text" id="identDirecaoSeta" name="identDirecaoSeta" required>
 		  </div>
 
 		  <div class="grupoform">
 			<label for="identPeriodicidade">identPeriodicidade: </label>
-			<input type="text" id="identPeriodicidade" required>
+			<input type="text" id="identPeriodicidade" name="identPeriodicidade" required>
 		  </div>
 
 		  <div class="grupoform">
 			<label for="identReferencial">identReferencial: </label>
-			<input type="text" id="identReferencial" required>
+			<input type="text" id="identReferencial" name="identReferencial" required>
 		  </div>
+		  
+		  <div class="grupoform">
+			<label for="identReferencial">identReferencial: </label>
+			<input type="text" id="identReferencial" name="identReferencial" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="informacoesAdicionais">informacoesAdicionais: </label>
+			<input type="text" id="informacoesAdicionais" name="informacoesAdicionais" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="nome">nome: </label>
+			<input type="text" id="nome" name="nome" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="numDecimais">numDecimais: </label>
+			<input type="text" id="numDecimais" name="numDecimais" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="objetivo">objetivo: </label>
+			<input type="text" id="objetivo" name="objetivo" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="unidade">unidade: </label>
+			<input type="text" id="unidade" name="unidade" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="usuarioUltAlteracao">usuarioUltAlteracao: </label>
+			<input type="text" id="usuarioUltAlteracao" name="usuarioUltAlteracao" required>
+		  </div>
+		  
+		  <div class="grupoform">
+			<label for="versao">versao: </label>
+			<input type="text" id="versao" name="versao" required>
+		  </div>
+		  
 		  <div>
             <input type="submit" id="submitButton"  name="submitButton" value="Submit">
         </div>
 
 		
 	</div>
-	<table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.dataIntegração)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataIntegração)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
     </table>
-	<script src="jquery.js"></script>
-    <script src="scripts.js"></script>
   </body>
 </html>
 
 <scrip src="bower_components/jquery/jquery.js"></scrip>
 
-<script>
-$("#enviar").click(function(){
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        /// Quando usuário clicar em salvar será feito todos os passo abaixo
+        $('#submitButton').click(function() {
+			console.log("Chegou aqui\n");
+			var createInput1 = $('#dataIntegracao');
+			var createInput2 = $('#dataUltAlteracao');
+			var createInput3 = $('#formulaCalculo');
+			var createInput4 = $('#idDrgIntegracao');
+			var createInput5 = $('#identDirecaoSeta');
+			var createInput6 = $('#identPeriodicidade');
+			var createInput7 = $('#identReferencial');
+			debugger;
 
-  var nome = $("#nome").val();
-  var cpf = $("#cpf").val();
-  var email = $("#email").val();
-  var rua = $("#endereco").val();
-  var complemento = $("#complemento").val();
-  var bairro = $("#bairro").val();
-  var cep = $("#cep").val();
-  var cidade = $("#cidade").val();
-  var estado = $("#estado").val();
-  var telefone = $("#telefone").val();
-  var numero = $("#numero").val();
-  var localidade =  {rua,complemento,bairro,cep,cidade,estado,numero};
-  var investidor = {nome,cpf,email,localidade,telefone};
-
-
-  $.ajax({
-    url: "indicador/save",
-    type: "POST",
-    data: {"investidor":{"nome":nome, "cpf":cpf, "email":email, "localidade":{"rua":rua,"complemento":complemento,"bairro":bairro,"cep":cep,"cidade":cidade,"estado":estado,"numero":numero},"telefone":telefone}},
-    contentType: "application/json",
-    success: function(data){
-      console.log(data.serialize());
-  },
-  error: function(error){
-       console.log("Something went wrong", error);
-   }
-  });
-});
+			$.ajax({
+				url: '/indicador/save',
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({ dataIntegracao: createInput1.val(), dataUltAlteracao: createInput2.val(), formulaCalculo: createInput3.val(), idDrgIntegracao: createInput4.val(), identDirecaoSeta: createInput5.val(), identPeriodicidade: createInput6.val(), identReferencial: createInput7.val(), informacoesAdicionais: createInput1.val(), nome: createInput2.val(), numDecimais: createInput3.val(), objetivo: createInput4.val(), unidade: createInput5.val(), usuarioUltAlteracao: createInput6.val(), versao: createInput7.val() }),
+				success: function(response) {
+					console.log(response);
+					createInput1.val('');
+					createInput2.val('');
+					createInput3.val('');
+					createInput4.val('');
+					createInput5.val('');
+					createInput6.val('');
+					createInput7.val('');
+				}
+			});
+		});
+	});
 </script>
